@@ -1,7 +1,7 @@
 #include "Engine.h"
 
 // Function prototypes
-
+void myUpdateScene(GLFWwindow* window, double tDelta);
 
 int main(void) {
 
@@ -17,8 +17,11 @@ int main(void) {
 
 	//
 	// Setup game scene objects here
-	//
 	
+	addObject("Player", glm::vec2(0, 0), glm::radians(0.0f), glm::vec2(0.5f, 0.5f), "Resources\\Textures\\1000012029.png");
+	
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Enter main loop - this handles update and render calls
 	engineMainLoop();
@@ -28,6 +31,12 @@ int main(void) {
 
 	// return success :)
 	return 0;
+}
+void myUpdateScene(GLFWwindow* window, double tDelta) {
+	// add update code here
+	const float pi = 3.141593f;
+	const float thetaVelocity = (pi / 180.0f) * 90.0f; // 90 degrees stored as radians
+
 }
 
 
