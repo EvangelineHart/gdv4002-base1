@@ -18,10 +18,20 @@ int main(void) {
 	//
 	// Setup game scene objects here
 	
-	addObject("Player", glm::vec2(0, 0), glm::radians(0.0f), glm::vec2(0.5f, 0.5f), "Resources\\Textures\\1000012029.png");
+	addObject("player", glm::vec2(0, 0), glm::radians(0.0f), glm::vec2(0.5f, 0.5f), "Resources\\Textures\\1000012029.png");
 	
+	setUpdateFunction(myUpdateScene);
+	
+	addObject("asteriod_1", glm::vec2(1.3f, 1.3f), 0.0f, glm::vec2(0.6f, 0.6f), "Resources\\Textures\\1000012028.png");
+	
+	addObject("asteriod_2", glm::vec2(-1.3f, -1.0f), 0.0f, glm::vec2(0.9f, 0.9f), "Resources\\Textures\\1000012028.png");
+	
+	addObject("asteriod_3", glm::vec2(1.7f, -1.5f), 0.0f, glm::vec2(1.0f, 1.0f), "Resources\\Textures\\1000012027.png");
+	
+	addObject("asteriod_4", glm::vec2(-1.8f, 1.3f), 0.0f, glm::vec2(1.0f, 0.9f), "Resources\\Textures\\1000012027.png");
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
 
 	// Enter main loop - this handles update and render calls
 	engineMainLoop();
@@ -35,8 +45,9 @@ int main(void) {
 void myUpdateScene(GLFWwindow* window, double tDelta) {
 	// add update code here
 	const float pi = 3.141593f;
-	const float thetaVelocity = (pi / 180.0f) * 90.0f; // 90 degrees stored as radians
-
+	const float thetaVelocity = (pi / 180.0f) * -90.0f; // 90 degrees stored as radians
+	GameObject2D* player1 = getObject("player");
+	player1->orientation = player1->orientation + (thetaVelocity * tDelta);
 }
 
 
