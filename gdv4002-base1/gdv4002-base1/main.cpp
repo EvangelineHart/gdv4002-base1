@@ -28,7 +28,7 @@ int main(void) {
 	
 	addObject("asteriod_3", glm::vec2(1.7f, -1.5f), 0.0f, glm::vec2(1.0f, 1.0f), "Resources\\Textures\\1000012027.png");
 	
-	addObject("asteriod_4", glm::vec2(-1.8f, 1.3f), 0.0f, glm::vec2(1.0f, 0.9f), "Resources\\Textures\\1000012027.png");
+	addObject("asteriod_4", glm::vec2(-1.8f, 1.4f), 0.0f, glm::vec2(1.0f, 0.9f), "Resources\\Textures\\1000012027.png");
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
