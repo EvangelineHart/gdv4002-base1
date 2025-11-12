@@ -1,6 +1,9 @@
 #include "Engine.h"
 #include "Keys.h"
 #include <bitset>
+#include <complex>
+#include <cmath>
+
 
 // Function prototypes
 void myUpdateScene(GLFWwindow* window, double tDelta);
@@ -53,13 +56,28 @@ void myUpdateScene(GLFWwindow* window, double tDelta) {
 	// add update code here
 	
 	static float playerSpeed = 1.0f; // distance per second
-	static float rotationSpeed = 1.0f;
-
+	static float rotationSpeed = 3.5f;
+	
 	GameObject2D* player = getObject("player");
 
 	if (keys.test(Key::W) == true) {
+		/*const float pi = 3.141593f;
+		std::complex<float> i = std::complex<float>(0.0f, 1.0f);
+		
+		float p = pi / player->orientation;
+		std::complex<float> q = exp(i * p);
+		
+		float x = q.real();
+		float y = q.imag();
+		printf("%f and %f", x, y);
+		//player->position += (x, y);*/
 
-		player->position.y += playerSpeed * (float)tDelta;
+		printf("working");
+
+		// float angleOfOriantation = player->orientation;
+		// player->position.y += playerSpeed * (float)tDelta;
+	
+
 	}
 	if (keys.test(Key::S) == true) {
 
@@ -67,12 +85,12 @@ void myUpdateScene(GLFWwindow* window, double tDelta) {
 	}
 	if (keys.test(Key::A) == true) {
 		
-		player->orientation += 0.03f;
+		player->orientation += rotationSpeed * (float)tDelta;
 		
 	}
 	if (keys.test(Key::D) == true) {
 
-		player->orientation += -0.03f;
+		player->orientation += -rotationSpeed * (float)tDelta;
 	}
 
 
