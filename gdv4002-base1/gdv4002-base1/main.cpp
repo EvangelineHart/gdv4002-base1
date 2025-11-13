@@ -1,12 +1,11 @@
 #include "Engine.h"
 #include "Keys.h"
 #include <bitset>
-#include <complex>
-#include <cmath>
+#include "Player.h"
+#include "Enemy.h"
 
 
 // Function prototypes
-void myUpdateScene(GLFWwindow* window, double tDelta);
 void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
 std::bitset<5> keys{ 0x0 };
 
@@ -24,23 +23,33 @@ int main(void) {
 
 	//
 	// Setup game scene objects here
-	
-	addObject("player", glm::vec2(0, 0), glm::radians(0.0f), glm::vec2(0.5f, 0.5f), "Resources\\Textures\\1000012029.png");
-	
-	addObject("asteriod_1", glm::vec2(1.3f, 1.3f), 0.0f, glm::vec2(0.6f, 0.6f), "Resources\\Textures\\1000012028.png");
-	
-	addObject("asteriod_2", glm::vec2(-1.3f, -1.0f), 0.0f, glm::vec2(0.9f, 0.9f), "Resources\\Textures\\1000012028.png");
-	
-	addObject("asteriod_3", glm::vec2(1.7f, -1.5f), 0.0f, glm::vec2(1.0f, 1.0f), "Resources\\Textures\\1000012027.png");
-	
-	addObject("asteriod_4", glm::vec2(-1.8f, 1.4f), 0.0f, glm::vec2(1.0f, 0.9f), "Resources\\Textures\\1000012027.png");
+	GLuint playerTexture = loadTexture("Resources\\Textures\\1000012029.png");
 
+	Player* mainPlayer = new Player(glm::vec2(0.0f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), playerTexture, 1.0f);
+
+	addObject("player", mainPlayer);
 	
+	// 1. Load enemy texture 
+	GLuint enemyTexture = loadTexture("Resources\\Textures\\alien01.png");
+
+	// 2. Create enemy objects
+	Enemy* enemy1 = new Enemy(glm::vec2(0.0f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), enemyTexture, 0.0f, glm::radians(45.0f));
+
+	Enemy* enemy2 = new Enemy(glm::vec2(1.0f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), enemyTexture, 0.0f, glm::radians(90.0f));
+
+	Enemy* enemy3 = new Enemy(glm::vec2(2.0f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), enemyTexture, 0.0f, glm::radians(60.0f));
+
+	// Add enemy objects to the engine
+	addObject("enemy1", enemy1);
+	addObject("enemy2", enemy2);
+	addObject("enemy3", enemy3);
+
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glBlendFunc(GL_EQUAL, 0);
-	
-	setUpdateFunction(myUpdateScene);
+
+
 	setKeyboardHandler(myKeyboardHandler);
 
 	// Enter main loop - this handles update and render calls
@@ -52,49 +61,10 @@ int main(void) {
 	// return success :)
 	return 0;
 }
-void myUpdateScene(GLFWwindow* window, double tDelta) {
-	// add update code here
-	
-	static float playerSpeed = 1.0f; // distance per second
-	static float rotationSpeed = 3.5f;
-	
-	GameObject2D* player = getObject("player");
-
-	if (keys.test(Key::W) == true) {
-		/*const float pi = 3.141593f;
-		std::complex<float> i = std::complex<float>(0.0f, 1.0f);
-		
-		float p = pi / player->orientation;
-		std::complex<float> q = exp(i * p);
-		
-		float x = q.real();
-		float y = q.imag();
-		printf("%f and %f", x, y);
-		//player->position += (x, y);*/
-
-		printf("working");
-
-		// float angleOfOriantation = player->orientation;
-		// player->position.y += playerSpeed * (float)tDelta;
-	
-
-	}
-	if (keys.test(Key::S) == true) {
-
-		player->position.y -= playerSpeed * (float)tDelta;
-	}
-	if (keys.test(Key::A) == true) {
-		
-		player->orientation += rotationSpeed * (float)tDelta;
-		
-	}
-	if (keys.test(Key::D) == true) {
-
-		player->orientation += -rotationSpeed * (float)tDelta;
-	}
 
 
-}
+
+
 void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	// Check if the key was just pressed
