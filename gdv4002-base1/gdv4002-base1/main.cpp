@@ -25,9 +25,10 @@ int main(void) {
 	// Setup game scene objects here
 	GLuint playerTexture = loadTexture("Resources\\Textures\\1000012029.png");
 
-	Player* mainPlayer = new Player(glm::vec2(0.0f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), playerTexture, 1.0f);
+	Player* mainPlayer = new Player(glm::vec2(-1.5f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), playerTexture, 1.0f);
 
 	addObject("player", mainPlayer);
+
 	
 	// 1. Load enemy texture 
 	GLuint enemyTexture = loadTexture("Resources\\Textures\\alien01.png");

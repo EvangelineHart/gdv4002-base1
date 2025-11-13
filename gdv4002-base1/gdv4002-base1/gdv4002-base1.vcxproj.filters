@@ -42,7 +42,7 @@
     <ClCompile Include="GameObject2D.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="MyClasses.cpp">
+    <ClCompile Include="PLayer.cpp">
       <Filter>MyClasses</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">

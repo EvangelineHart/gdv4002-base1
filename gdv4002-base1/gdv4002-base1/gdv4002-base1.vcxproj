@@ -141,7 +141,7 @@ copy "$(SolutionDir)Libs\FreeImage\Wrapper\FreeImagePlus\dist\x64\FreeImagePlus.
     <ClCompile Include="GUMemory.cpp" />
     <ClCompile Include="GUObject.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MyClasses.cpp" />
+    <ClCompile Include="PLayer.cpp" />
     <ClCompile Include="texture_loader.cpp" />
   </ItemGroup>
   <ItemGroup>
