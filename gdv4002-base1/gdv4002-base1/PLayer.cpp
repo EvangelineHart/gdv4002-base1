@@ -4,6 +4,7 @@
 
 extern std::bitset<5> keys;
 
+
 Player::Player(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize, GLuint initTextureID, float mass) : GameObject2D(initPosition, initOrientation, initSize, initTextureID) {
 
 	this->mass = mass;
@@ -19,20 +20,24 @@ void Player::update(double tDelta) {
 	if (keys.test(Key::W) == true) {
 
 		F += glm::vec2(0.0f, thrust);
+		orientation = 0.0f;
 	}
 	if (keys.test(Key::S) == true) {
 
 		F += glm::vec2(0.0f, -thrust);
+		orientation = 3.14159f;
 	}
 	if (keys.test(Key::A) == true) {
 
 		F += glm::vec2(-thrust, 0.0f);
+		orientation = 1.5708f;
 	}
 	if (keys.test(Key::D) == true) {
 
 		F += glm::vec2(thrust, 0.0f);
+		orientation = -1.5708f;
 	}
-	
+
 	// 2. calculate acceleration.  If f=ma, a = f/m
 	glm::vec2 a = F * (1.0f / mass);
 	
