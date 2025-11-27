@@ -2,7 +2,8 @@
 #include "Keys.h"
 #include <bitset>
 #include "Player.h"
-#include "Enemy.h"
+#include "EnemyType1.h"
+
 
 
 // Function prototypes
@@ -31,19 +32,25 @@ int main(void) {
 
 	
 	// 1. Load enemy texture 
-	GLuint enemyTexture = loadTexture("Resources\\Textures\\alien01.png");
+	GLuint enemyTexture1 = loadTexture("Resources\\Textures\\1000012027.png");
+	GLuint enemyTexture2 = loadTexture("Resources\\Textures\\1000012028.png");
 
 	// 2. Create enemy objects
-	Enemy* enemy1 = new Enemy(glm::vec2(0.0f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), enemyTexture, 0.0f, glm::radians(45.0f));
+	Enemy* enemy1 = new Enemy(glm::vec2(1.0f, 1.0f), 0.5f, glm::vec2(1.2f, 1.2f), enemyTexture1, 1.5f, glm::radians(45.0f));
 
-	Enemy* enemy2 = new Enemy(glm::vec2(1.0f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), enemyTexture, 0.0f, glm::radians(90.0f));
+	Enemy* enemy2 = new Enemy(glm::vec2(-2.0f, 0.5f), 0.2f, glm::vec2(0.5f, 0.5f), enemyTexture1, -0.5f, glm::radians(90.0f));
 
-	Enemy* enemy3 = new Enemy(glm::vec2(2.0f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), enemyTexture, 0.0f, glm::radians(60.0f));
-
+	Enemy* enemy3 = new Enemy(glm::vec2(2.0f, 0.0f), 0.4f, glm::vec2(0.9f, 0.9f), enemyTexture2, 0.5f, glm::radians(25.0f));
+	
+	Enemy* enemy4 = new Enemy(glm::vec2(-1.0f, -1.0f), 1.0f, glm::vec2(1.0f, 1.5f), enemyTexture2, -1.0f, glm::radians(-45.0f));
+	
+	//Enemy(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize, GLuint initTextureID, float initialPhase, float initialPhaseVelocity);
+	
 	// Add enemy objects to the engine
 	addObject("enemy1", enemy1);
 	addObject("enemy2", enemy2);
 	addObject("enemy3", enemy3);
+	addObject("enemy4", enemy4);
 
 
 	glEnable(GL_BLEND);

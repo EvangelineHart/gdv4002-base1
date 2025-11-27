@@ -1,4 +1,4 @@
-#include "Enemy.h"
+#include "EnemyType1.h"
 
 Enemy::Enemy(
 	glm::vec2 initPosition,
@@ -11,12 +11,15 @@ Enemy::Enemy(
 
 	phaseAngle = initialPhase;
 	phaseVelocity = initialPhaseVelocity;
+	orientation = initOrientation;
 }
 void Enemy::update(double tDelta) {
 
 	// Set position based on phaseAngle
-	position.y = sinf(phaseAngle);
-
+	position.y = phaseAngle;
+	
 	// Update phaseAngle based on velocity * time elapsed
 	phaseAngle += phaseVelocity * tDelta;
+	orientation += phaseVelocity * tDelta;
+	
 }

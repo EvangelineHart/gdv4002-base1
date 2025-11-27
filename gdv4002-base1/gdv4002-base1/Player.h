@@ -7,7 +7,7 @@ class Player : public GameObject2D {
 private:
 	float		mass;
 	glm::vec2	velocity;
-	const float thrust = 1.5f;
+	const float thrust = 1.0f;
 	
 
 public:
