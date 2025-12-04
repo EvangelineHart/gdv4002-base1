@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Keys.h"
+#include "Engine.h"
 #include <bitset>
 
 extern std::bitset<5> keys;
@@ -15,6 +16,24 @@ Player::Player(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize
 void Player::update(double tDelta) {
 
 	glm::vec2 F = glm::vec2(0.0f, 0.0f);
+	
+	if (position.y < -2.5) {
+
+		position.y = 2.5f;
+	}
+	if (position.x < -2.5) {
+
+		position.x = 2.5f;
+	}
+	if (position.y > 2.5) {
+
+		position.y = -2.5f;
+	}
+	if (position.x > 2.5) {
+
+		position.x = -2.5f;
+	}
+
 
 	// 1. accumulate forces
 	if (keys.test(Key::W) == true) {
