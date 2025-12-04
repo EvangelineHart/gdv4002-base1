@@ -3,12 +3,16 @@
 #include <bitset>
 #include "Player.h"
 #include "EnemyType1.h"
+#include "Emitter.h"
 
 
 
 // Function prototypes
 void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
 std::bitset<5> keys{ 0x0 };
+// Global vars
+glm::vec2 gravity = glm::vec2(0.0f, -0.005f);
+
 
 int main(void) {
 
@@ -24,6 +28,15 @@ int main(void) {
 
 	//
 	// Setup game scene objects here
+
+	Emitter* emitter = new Emitter(
+		glm::vec2(0.0f, getViewplaneHeight() / 2.0f * 1.2f),
+		glm::vec2(getViewplaneWidth() / 2.0f, 0.0f),
+		0.05f);
+
+	addObject("emitter", emitter);
+
+
 	GLuint playerTexture = loadTexture("Resources\\Textures\\1000012029.png");
 
 	Player* mainPlayer = new Player(glm::vec2(-1.5f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), playerTexture, 1.0f);
@@ -68,6 +81,7 @@ int main(void) {
 
 	// return success :)
 	return 0;
+	
 }
 
 

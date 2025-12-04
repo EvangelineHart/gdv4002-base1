@@ -42,13 +42,16 @@
     <ClCompile Include="GameObject2D.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="PLayer.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>MyClasses</Filter>
     </ClCompile>
     <ClCompile Include="EnemyType1.cpp">
       <Filter>MyClasses</Filter>
     </ClCompile>
     <ClCompile Include="Snowflake.cpp">
+      <Filter>MyClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Emitter.cpp">
       <Filter>MyClasses</Filter>
     </ClCompile>
   </ItemGroup>
@@ -84,6 +87,9 @@
       <Filter>MyClasses</Filter>
     </ClInclude>
     <ClInclude Include="Snowflake.h">
+      <Filter>MyClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Emitter.h">
       <Filter>MyClasses</Filter>
     </ClInclude>
   </ItemGroup>
