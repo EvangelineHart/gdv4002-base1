@@ -13,6 +13,6 @@ public:
 	Player(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize, GLuint initTextureID, float mass);
 
 	void update(double tDelta) override;
-
+	float speed = 0.2f;
 };
 
