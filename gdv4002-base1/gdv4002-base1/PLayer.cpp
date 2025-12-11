@@ -43,7 +43,6 @@ void Player::update(double tDelta) {
 		
 		position += direction * (float)tDelta;
 		
-		F += glm::vec2(0.0f, thrust);
 		
 	}
 	if (keys.test(Key::S) == true) {
@@ -58,12 +57,15 @@ void Player::update(double tDelta) {
 		
 	}
 	if (keys.test(Key::A) == true) {
-		orientation += 0.02f;
-
-		F += glm::vec2(-thrust, 0.0f);
 		
+		//ientation += 0.02;
+
+		F += 0.02;
+		glm::vec2 a = F * (1.0f / mass);
+		orientation = o + (velocity * (float)tDelta);
 	}
 	if (keys.test(Key::D) == true) {
+		
 		orientation -= 0.02f;
 
 		F += glm::vec2(thrust, 0.0f);
@@ -77,6 +79,8 @@ void Player::update(double tDelta) {
 	velocity = velocity + (a * (float)tDelta);
 	
 	// 4. integrate to get new position
+	
+
 	//position = position + (velocity * (float)tDelta);
 
 }

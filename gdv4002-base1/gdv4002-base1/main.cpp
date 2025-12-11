@@ -10,9 +10,11 @@
 // Function prototypes
 void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
 std::bitset<5> keys{ 0x0 };
-// Global vars
-glm::vec2 gravity = glm::vec2(0.0f, -0.005f);
+glm::vec2 gravity = glm::vec2(0.0f, -0.03f);
 
+// Global variables
+
+void deleteSnowflakes(GLFWwindow* window, double tDelta);
 
 int main(void) {
 
@@ -27,6 +29,13 @@ int main(void) {
 	}
 
 	//
+	// Setup rendering properties (enable blending)
+	//
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDepthFunc(GL_ALWAYS);
+
+	
 	// Setup game scene objects here
 
 	Emitter* emitter = new Emitter(
@@ -65,13 +74,9 @@ int main(void) {
 	addObject("enemy3", enemy3);
 	addObject("enemy4", enemy4);
 
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glBlendFunc(GL_EQUAL, 0);
-
-
 	setKeyboardHandler(myKeyboardHandler);
+
+	setUpdateFunction(deleteSnowflakes, false);
 
 	// Enter main loop - this handles update and render calls
 	engineMainLoop();
@@ -83,8 +88,18 @@ int main(void) {
 	return 0;
 	
 }
+void deleteSnowflakes(GLFWwindow* window, double tDelta) {
 
+	GameObjectCollection snowflakes = getObjectCollection("snowflake");
 
+	for (int i = 0; i < snowflakes.objectCount; i++) {
+
+		if (snowflakes.objectArray[i]->position.y < -(getViewplaneHeight() / 2.0f)) {
+
+			deleteObject(snowflakes.objectArray[i]);
+		}
+	}
+}
 
 
 void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods)
