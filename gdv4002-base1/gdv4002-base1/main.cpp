@@ -14,7 +14,7 @@ glm::vec2 gravity = glm::vec2(0.0f, -0.03f);
 
 // Global variables
 
-void deleteSnowflakes(GLFWwindow* window, double tDelta);
+void deleteBullets(GLFWwindow* window, double tDelta);
 
 int main(void) {
 
@@ -28,22 +28,15 @@ int main(void) {
 		return initResult; // exit if setup failed
 	}
 
-	//
+	
 	// Setup rendering properties (enable blending)
-	//
+	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDepthFunc(GL_ALWAYS);
 
 	
 	// Setup game scene objects here
-
-	Emitter* emitter = new Emitter(
-		glm::vec2(0.0f, getViewplaneHeight() / 2.0f * 1.2f),
-		glm::vec2(getViewplaneWidth() / 2.0f, 0.0f),
-		0.05f);
-
-	addObject("emitter", emitter);
 
 
 	GLuint playerTexture = loadTexture("Resources\\Textures\\1000012029.png");
@@ -66,7 +59,6 @@ int main(void) {
 	
 	Enemy* enemy4 = new Enemy(glm::vec2(-1.0f, -1.0f), 1.0f, glm::vec2(1.0f, 1.5f), enemyTexture2, -1.0f, glm::radians(-45.0f));
 	
-	//Enemy(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize, GLuint initTextureID, float initialPhase, float initialPhaseVelocity);
 	
 	// Add enemy objects to the engine
 	addObject("enemy1", enemy1);
@@ -76,7 +68,7 @@ int main(void) {
 
 	setKeyboardHandler(myKeyboardHandler);
 
-	setUpdateFunction(deleteSnowflakes, false);
+	setUpdateFunction(deleteBullets, false);
 
 	// Enter main loop - this handles update and render calls
 	engineMainLoop();
@@ -88,15 +80,19 @@ int main(void) {
 	return 0;
 	
 }
-void deleteSnowflakes(GLFWwindow* window, double tDelta) {
+void deleteBullets(GLFWwindow* window, double tDelta) {
 
-	GameObjectCollection snowflakes = getObjectCollection("snowflake");
+	GameObjectCollection bullet = getObjectCollection("bullets");
 
-	for (int i = 0; i < snowflakes.objectCount; i++) {
+	for (int i = 0; i < bullet.objectCount; i++) {
 
-		if (snowflakes.objectArray[i]->position.y < -(getViewplaneHeight() / 2.0f)) {
+		if (bullet.objectArray[i]->position.y < -(getViewplaneHeight() / 2.0f)) {
 
-			deleteObject(snowflakes.objectArray[i]);
+			deleteObject(bullet.objectArray[i]);
+		}
+		if (bullet.objectArray[i]->position.x < -(getViewplaneWidth() / 2.0f)) {
+
+			deleteObject(bullet.objectArray[i]);
 		}
 	}
 }
@@ -126,7 +122,9 @@ void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, in
 		case GLFW_KEY_D:
 			keys[Key::D] = true;
 			break;
-
+		case GLFW_KEY_SPACE:
+			keys[Key::SPACE] = true;
+			break;
 		}
 	}
 	// If not pressed, check the key has just been released
@@ -145,10 +143,12 @@ void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, in
 		case GLFW_KEY_D:
 			keys[Key::D] = false;
 			break;
-
+		case GLFW_KEY_SPACE:
+			keys[Key::SPACE] = false;
+			break;
 		}
 
-		// handle key release events
+		
 	}
 }
 

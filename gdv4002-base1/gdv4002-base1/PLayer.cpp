@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Keys.h"
 #include "Engine.h"
+#include "Emitter.h"
 #include <bitset>
 
 extern std::bitset<5> keys;
@@ -9,7 +10,7 @@ extern std::bitset<5> keys;
 Player::Player(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize, GLuint initTextureID, float mass) : GameObject2D(initPosition, initOrientation, initSize, initTextureID) {
 
 	this->mass = mass;
-	velocity = glm::vec2(0.0f, 0.0f); // default to 0 velocity
+	velocity = glm::vec2(0.0f, 0.0f); 
 }
 
 void Player::update(double tDelta) {
@@ -41,8 +42,7 @@ void Player::update(double tDelta) {
 		float y = sinf(orientation);
 		glm::vec2 direction = glm::vec2(x, y);
 		
-		position += direction * (float)tDelta;
-		
+		F += direction * thrust;
 		
 	}
 	if (keys.test(Key::S) == true) {
@@ -51,25 +51,29 @@ void Player::update(double tDelta) {
 		float y = sinf(orientation);
 		glm::vec2 direction = glm::vec2(x, y);
 
-		position -= direction * (float)tDelta;
-
-		//F += glm::vec2(0.0f, -thrust);
+		F -= direction * thrust;
 		
 	}
 	if (keys.test(Key::A) == true) {
 		
 		orientation += 0.002;
 
-		//F += 0.02;
-		//glm::vec2 a = F * (1.0f / mass);
-	//	orientation = o + (velocity * (float)tDelta);
 	}
 	if (keys.test(Key::D) == true) {
 		
 		orientation -= 0.002f;
 
-		//F += glm::vec2(thrust, 0.0f);
-		
+	}
+	if (keys.test(Key::SPACE) == true) {
+		float x = cosf(orientation);
+		float y = sinf(orientation);
+
+		Emitter* emitter = new Emitter(
+			glm::vec2(position.x, position.y),
+			glm::vec2(x, y), 0.2f);
+
+
+		addObject("emitter", emitter);
 	}
 
 	// 2. calculate acceleration.  If f=ma, a = f/m
@@ -79,8 +83,6 @@ void Player::update(double tDelta) {
 	velocity = velocity + (a * (float)tDelta);
 	
 	// 4. integrate to get new position
-	
-
-	//position = position + (velocity * (float)tDelta);
+	position = position + (velocity * (float)tDelta);
 
 }
