@@ -53,22 +53,22 @@ void Player::update(double tDelta) {
 
 		position -= direction * (float)tDelta;
 
-		F += glm::vec2(0.0f, -thrust);
+		//F += glm::vec2(0.0f, -thrust);
 		
 	}
 	if (keys.test(Key::A) == true) {
 		
-		//ientation += 0.02;
+		orientation += 0.002;
 
-		F += 0.02;
-		glm::vec2 a = F * (1.0f / mass);
-		orientation = o + (velocity * (float)tDelta);
+		//F += 0.02;
+		//glm::vec2 a = F * (1.0f / mass);
+	//	orientation = o + (velocity * (float)tDelta);
 	}
 	if (keys.test(Key::D) == true) {
 		
-		orientation -= 0.02f;
+		orientation -= 0.002f;
 
-		F += glm::vec2(thrust, 0.0f);
+		//F += glm::vec2(thrust, 0.0f);
 		
 	}
 

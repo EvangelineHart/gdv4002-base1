@@ -21,7 +21,8 @@ Emitter::Emitter(glm::vec2 initPosition, glm::vec2 initSize, float emitTimeInter
 			cout << "successfully loaded texture " << path << endl;
 		else
 			cout << "failed to load texture " << path << endl;
-		// Obtain a seed for the random number engine
+		
+		 // Obtain a seed for the random number engine
 		random_device rd;
 
 		// Standard mersenne_twister_engine seeded with rd() - mt19937 is a high-quality pseudo-random number generator
