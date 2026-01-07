@@ -10,8 +10,9 @@ private:
 	// We'll model physics properties for (linear) movement - that is movement without rotation
 	float		mass;
 	glm::vec2	velocity;
-	const float thrust = 1.0f;
+	const float thrust = 0.9f;
 	
+
 
 public:
 

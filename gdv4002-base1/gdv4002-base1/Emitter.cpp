@@ -26,7 +26,8 @@ void Emitter::update(double tDelta) {
 
 		// decrease emitCounter by emitTimeInterval - don't set to 0 as this would ignore the case where multiple particles are needed.
 		emitCounter -= emitTimeInterval;
-
+		
+		
 		// Create new particle
 		float x = position.x;
 		float y = position.y;

@@ -6,7 +6,6 @@
 
 extern std::bitset<5> keys;
 
-
 Player::Player(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize, GLuint initTextureID, float mass) : GameObject2D(initPosition, initOrientation, initSize, initTextureID) {
 
 	this->mass = mass;
@@ -14,7 +13,9 @@ Player::Player(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize
 }
 
 void Player::update(double tDelta) {
-
+	
+	playerOrientation = orientation;
+	
 	glm::vec2 F = glm::vec2(0.0f, 0.0f);
 	
 	if (position.y < -2.5) {
@@ -57,12 +58,13 @@ void Player::update(double tDelta) {
 	if (keys.test(Key::A) == true) {
 		
 		orientation += 0.002;
-
+		playerOrientation = orientation;
 	}
 	if (keys.test(Key::D) == true) {
 		
 		orientation -= 0.002f;
-
+		playerOrientation = orientation;
+		
 	}
 	if (keys.test(Key::SPACE) == true) {
 		float x = cosf(orientation);

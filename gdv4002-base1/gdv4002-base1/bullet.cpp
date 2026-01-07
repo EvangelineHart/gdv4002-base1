@@ -13,8 +13,12 @@ bullet::bullet(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize
 void bullet::update(double tDelta) {
 
 	// 1. Physics bit for movement
-	float x = cosf(orientation);
-	float y = sinf(orientation);
+	Player::GameObject2D obj;
+	float localOrientation = obj.orientation;
+
+	float x = cosf(localOrientation);
+	float y = sinf(localOrientation);
+	
 	glm::vec2 direction = glm::vec2(x, y);
 
 	// 1.1. Sum forces - only add gravity for now
