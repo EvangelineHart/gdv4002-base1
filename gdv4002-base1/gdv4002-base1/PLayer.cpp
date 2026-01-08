@@ -3,8 +3,10 @@
 #include "Engine.h"
 #include "Emitter.h"
 #include <bitset>
+#include <iostream>
 
 extern std::bitset<5> keys;
+
 
 Player::Player(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize, GLuint initTextureID, float mass) : GameObject2D(initPosition, initOrientation, initSize, initTextureID) {
 
@@ -15,6 +17,13 @@ Player::Player(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize
 void Player::update(double tDelta) {
 	
 	playerOrientation = orientation;
+	
+	float x = cosf(orientation);
+	float y = sinf(orientation);
+
+	Emitter* emitter = new Emitter(
+		glm::vec2(position.x, position.y),
+		glm::vec2(x, y), 0.2f);
 	
 	glm::vec2 F = glm::vec2(0.0f, 0.0f);
 	
@@ -67,15 +76,9 @@ void Player::update(double tDelta) {
 		
 	}
 	if (keys.test(Key::SPACE) == true) {
-		float x = cosf(orientation);
-		float y = sinf(orientation);
 
-		Emitter* emitter = new Emitter(
-			glm::vec2(position.x, position.y),
-			glm::vec2(x, y), 0.2f);
+	addObject("bullet", emitter);
 
-
-		addObject("emitter", emitter);
 	}
 
 	// 2. calculate acceleration.  If f=ma, a = f/m
