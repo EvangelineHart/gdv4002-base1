@@ -7,6 +7,7 @@ using namespace std;
 
 
 Emitter::Emitter(glm::vec2 initPosition, glm::vec2 initSize, float emitTimeInterval) : GameObject2D(initPosition, 0.0f, initSize, 0) {
+	
 	this->emitTimeInterval = emitTimeInterval;
 	emitCounter = emitTimeInterval;
 
@@ -15,12 +16,11 @@ Emitter::Emitter(glm::vec2 initPosition, glm::vec2 initSize, float emitTimeInter
 	
 
 }
-// override render but do nothing - we'll not render anything for the emitter 
+
 void Emitter::render() {
 }
 void Emitter::update(double tDelta) {
 
-	//emitCounter += (float)tDelta;
 
 	while (emitCounter >= emitTimeInterval) {
 
@@ -28,7 +28,7 @@ void Emitter::update(double tDelta) {
 		emitCounter -= emitTimeInterval;
 		
 		
-		// Create new particle
+		// Create new bullet
 		float x = position.x;
 		float y = position.y;
 		float scale = 0.3f;
@@ -39,9 +39,8 @@ void Emitter::update(double tDelta) {
 
 		string key = string("bullet");
 
-		if (particleNumber > 0) { // first name in collection must not be numbered if using this approach
+		if (particleNumber > 0) { 
 
-			// add value so unique anyway - not using engine mechanism
 			key += to_string(particleNumber);
 		}
 

@@ -12,10 +12,13 @@ bullet::bullet(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize
 
 void bullet::update(double tDelta) {
 
-	// 1. Physics bit for movement
-	Player::GameObject2D obj;
-	float localOrientation = obj.orientation;
-
+	// 1. Physics bit for movement;
+	
+	// object researched from https://www.w3schools.com/cpp/cpp_classes.asp
+	//Player ::GameObject2D myObj;
+	//float localOrientation = myObj.getPlayerOrientation();
+	
+	float localOrientation = orientation;
 	float x = cosf(localOrientation);
 	float y = sinf(localOrientation);
 	

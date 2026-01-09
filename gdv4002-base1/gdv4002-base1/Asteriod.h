@@ -12,8 +12,6 @@ private:
 
 public:
 	
-	//Enemy(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize, GLuint initTextureID);
-	
 	 Enemy(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize, GLuint initTextureID, float initialPhase, float initialPhaseVelocity);
 
 	void update(double tDelta) override;
